@@ -3,7 +3,8 @@
 %define devname %mklibname -d pipewire-gobject
 %define girname %mklibname pipewire-gobject-gir
 %define namespace Pwg
-%define api_ver 0.1
+%define api 0.1
+%define major 0
 
 Name: pipewire-gobject
 Version: 0.3.9
@@ -55,23 +56,6 @@ Requires: %{libname} = %EVR
 %description -n %{girname}
 GObject introspection data for %_name.
 
-%package devel-doc
-Summary: Development documentation for %name
-Group: Development/Documentation
-BuildArch: noarch
-
-%description devel-doc
-This package contains development documentation for %_name.
-
-%package examples
-Summary: simple applications from %_name package
-Group: Development/Other
-Requires: %{girname} = %EVR
-
-%description examples
-This package provides example programs that can be used to chek
-the functionality of the %_name library.
-
 %prep
 %autosetup -n %{name}-%{version} -p1
 
@@ -83,17 +67,14 @@ the functionality of the %_name library.
 %meson_install
 
 %files -n %{libname}
-#_libdir/%libname-%api_ver.so.*
+%{_libdir}/libpwg-%{api}.so.%{major}*
 %doc AGENTS* CHANGELOG* README*
 
-%files -n %files -n %{devname}
-#_includedir/%__name-%api_ver/
-#_libdir/%libname-%api_ver.so
-#_pkgconfigdir/%__name-%api_ver.pc
-#{_datadir}/gir-1.0/%namespace-%api_ver.gir
+%files -n %{devname}
+%{_includedir}/pwg-%{api}/pwg/
+%{_libdir}/libpwg-%{api}.so
+%{_libdir}/pkgconfig/pwg-%{api}.pc
+%{_datadir}/gir-1.0/Pwg-%{api}.gir
 
 %files -n %{girname}
-#_typelibdir/%namespace-%api_ver.typelib
-
-%files devel-doc
-#_datadir/doc/%_name-%api_ver/
+%{_libdir}/girepository-1.0/Pwg-%{api}.typelib
