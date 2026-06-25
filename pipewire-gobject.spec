@@ -5,9 +5,6 @@
 %define namespace Pwg
 %define api_ver 0.1
 
-%def_enable tests
-%def_enable check
-
 Name: pipewire-gobject
 Version: 0.3.9
 Release: 1
@@ -16,9 +13,6 @@ Group: System/Libraries
 License: LGPL-2.1-or-later
 Url: https://github.com/bhack/pipewire-gobject
 Source0: https://github.com/bhack/pipewire-gobject/archive/%{version}/%{name}-%{version}.tar.gz
-
-
-%define pw_api_ver 0.3
 
 BuildRequires: meson 
 BuildRequires: gi-docgen
