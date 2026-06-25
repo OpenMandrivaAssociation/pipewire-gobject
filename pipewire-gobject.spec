@@ -95,7 +95,5 @@ the functionality of the %_name library.
 %files -n %{girname}
 %_typelibdir/%namespace-%api_ver.typelib
 
-%if_enabled doc
 %files devel-doc
 %_datadir/doc/%_name-%api_ver/
-%endif
