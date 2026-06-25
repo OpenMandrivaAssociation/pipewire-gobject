@@ -83,17 +83,17 @@ the functionality of the %_name library.
 %meson_install
 
 %files -n %{libname}
-%_libdir/%libname-%api_ver.so.*
+#_libdir/%libname-%api_ver.so.*
 %doc AGENTS* CHANGELOG* README*
 
 %files -n %files -n %{devname}
-%_includedir/%__name-%api_ver/
-%_libdir/%libname-%api_ver.so
-%_pkgconfigdir/%__name-%api_ver.pc
-%{_datadir}/gir-1.0/%namespace-%api_ver.gir
+#_includedir/%__name-%api_ver/
+#_libdir/%libname-%api_ver.so
+#_pkgconfigdir/%__name-%api_ver.pc
+#{_datadir}/gir-1.0/%namespace-%api_ver.gir
 
 %files -n %{girname}
-%_typelibdir/%namespace-%api_ver.typelib
+#_typelibdir/%namespace-%api_ver.typelib
 
 %files devel-doc
-%_datadir/doc/%_name-%api_ver/
+#_datadir/doc/%_name-%api_ver/
