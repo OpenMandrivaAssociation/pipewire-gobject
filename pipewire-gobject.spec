@@ -6,7 +6,7 @@
 
 Name: pipewire-gobject
 Version: 0.3.9
-Release: 1
+Release: 2
 Summary: Experimental GObject/GObject-Introspection binding layer for PipeWire
 Group: System/Libraries
 License: LGPL-2.1-or-later
@@ -20,6 +20,9 @@ BuildRequires: pkgconfig(libpipewire-0.3)
 BuildRequires: pkgconfig(gobject-introspection-1.0)
 BuildRequires: pkgconfig(pygobject-3.0)
 BuildRequires: pkgconfig(glib-2.0)
+BuildRequires: pkgconfig(python)
+BuildRequires: python%{pyver)dist(pip)
+BuildRequires: python%{pyver)dist(wheel)
 
 %description
 This project is a prototype for exposing a safe, high-level, app-facing
@@ -59,7 +62,7 @@ GObject introspection data for %{name}.
 %autosetup -n %{name}-%{version} -p1
 
 %build
-%meson \
+%meson -Dwheel=true
 %meson_build
 
 %install
