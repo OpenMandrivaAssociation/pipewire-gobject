@@ -58,12 +58,12 @@ Requires: %{libname} = %{EVRD}
 %description -n %{girname}
 GObject introspection data for %{name}.
 
-%package python-%{name}
+%package -n python-%{name}
 Summary: Python modules for %{name}
 Group: Python
 Requires: %{libname} = %{EVRD}
 
-%description python-%{name}
+%description -n python-%{name}
 Python module for %{name}
 
 %prep
@@ -102,6 +102,6 @@ mv %{buildroot}%{python3_sitelib}/pipewire_gobject/typelib/Pwg-0.1.typelib \
 %files -n %{girname}
 %{_libdir}/girepository-1.0/Pwg-%{api}.typelib
 
-%files python-%{name}
+%files -n python-%{name}
 %{python_sitelib}/pipewire_gobject/__init__.py
 %{python_sitelib}/pipewire_gobject/__pycache__/__init__.cpython-*.pyc
