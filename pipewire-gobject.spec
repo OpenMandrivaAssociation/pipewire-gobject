@@ -1,8 +1,6 @@
-%define __name pwg
 %define libname %mklibname pipewire-gobject
 %define devname %mklibname -d pipewire-gobject
 %define girname %mklibname pipewire-gobject-gir
-%define namespace Pwg
 %define api 0.1
 %define major 0
 
@@ -30,31 +28,32 @@ complete PipeWire binding yet, and it is not a mechanical one-to-one
 binding of the C API.
 
 %package -n %{libname}
-Summary: %name shared library
+Summary: %{name} shared library
 Group: System/Libraries
 Requires: python-gobject3
 Requires: %{_lib}pipewire
 Requires: typelib(GIRepository)
 
 %description -n %{libname}
-This package provides shared %namespace library.
+This package provides shared %{name} library.
 
 %package -n %{devname}
-Summary: Development files for %libname
+Summary: Development files for %{libname}
 Group: Development/C
-Requires: %{libname} = %EVR
+Provides: %{name}-devel = %{EVRD}
+Requires: %{libname} = %{EVRD}
 
 %description -n %{devname}
-The %libname-devel package provides libraries and header files for
-developing applications that use %namespace library.
+The %{libname}-devel package provides libraries and header files for
+developing applications that use %{name} library.
 
 %package -n %{girname}
-Summary: GObject introspection data for %_name
+Summary: GObject introspection data for %{name}
 Group: System/Libraries
-Requires: %{libname} = %EVR
+Requires: %{libname} = %{EVRD}
 
 %description -n %{girname}
-GObject introspection data for %_name.
+GObject introspection data for %{name}.
 
 %prep
 %autosetup -n %{name}-%{version} -p1
