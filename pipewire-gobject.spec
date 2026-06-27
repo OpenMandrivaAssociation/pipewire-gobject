@@ -79,4 +79,4 @@ GObject introspection data for %{name}.
 #{_datadir}/gir-1.0/Pwg-%{api}.gir
 
 %files -n %{girname}
-%{_libdir}/girepository-1.0/Pwg-%{api}.typelib
+#{_libdir}/girepository-1.0/Pwg-%{api}.typelib
