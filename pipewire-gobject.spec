@@ -21,6 +21,7 @@ BuildRequires: pkgconfig(gobject-introspection-1.0)
 BuildRequires: pkgconfig(pygobject-3.0)
 BuildRequires: pkgconfig(glib-2.0)
 BuildRequires: pkgconfig(python)
+BuildRequires: python-meson
 BuildRequires: python%{pyver}dist(pip)
 BuildRequires: python%{pyver}dist(wheel)
 
