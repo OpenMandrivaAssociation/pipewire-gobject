@@ -68,6 +68,19 @@ GObject introspection data for %{name}.
 %install
 %meson_install
 
+# If python modules enabled (meson -Dwheel=true), teen gir and typelibs are installed in wrong dirs.
+# They install to correct dirs when python is off.
+
+# move GIR
+mkdir -p %{buildroot}%{_datadir}/gir-1.0
+mv %{buildroot}%{python3_sitelib}/pipewire_gobject/gir/Pwg-0.1.gir \
+   %{buildroot}%{_datadir}/gir-1.0/
+
+# move typelib
+mkdir -p %{buildroot}%{_libdir}/girepository-1.0
+mv %{buildroot}%{python3_sitelib}/pipewire_gobject/typelib/Pwg-0.1.typelib \
+   %{buildroot}%{_libdir}/girepository-1.0/
+
 %files -n %{libname}
 %{_libdir}/libpwg-%{api}.so.%{major}*
 %doc AGENTS* CHANGELOG* README*
@@ -76,7 +89,7 @@ GObject introspection data for %{name}.
 %{_includedir}/pwg-%{api}/pwg/
 %{_libdir}/libpwg-%{api}.so
 %{_libdir}/pkgconfig/pwg-%{api}.pc
-#{_datadir}/gir-1.0/Pwg-%{api}.gir
+%{_datadir}/gir-1.0/Pwg-%{api}.gir
 
 %files -n %{girname}
-#{_libdir}/girepository-1.0/Pwg-%{api}.typelib
+%{_libdir}/girepository-1.0/Pwg-%{api}.typelib
