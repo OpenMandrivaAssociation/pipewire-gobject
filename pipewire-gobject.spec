@@ -76,7 +76,7 @@ GObject introspection data for %{name}.
 %{_includedir}/pwg-%{api}/pwg/
 %{_libdir}/libpwg-%{api}.so
 %{_libdir}/pkgconfig/pwg-%{api}.pc
-%{_datadir}/gir-1.0/Pwg-%{api}.gir
+#{_datadir}/gir-1.0/Pwg-%{api}.gir
 
 %files -n %{girname}
 %{_libdir}/girepository-1.0/Pwg-%{api}.typelib
