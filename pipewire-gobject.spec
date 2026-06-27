@@ -6,7 +6,7 @@
 
 Name: pipewire-gobject
 Version: 0.3.9
-Release: 1
+Release: 2
 Summary: Experimental GObject/GObject-Introspection binding layer for PipeWire
 Group: System/Libraries
 License: LGPL-2.1-or-later
@@ -20,6 +20,9 @@ BuildRequires: pkgconfig(libpipewire-0.3)
 BuildRequires: pkgconfig(gobject-introspection-1.0)
 BuildRequires: pkgconfig(pygobject-3.0)
 BuildRequires: pkgconfig(glib-2.0)
+BuildRequires: pkgconfig(python)
+BuildRequires: python%{pyver}dist(pip)
+BuildRequires: python%{pyver}dist(wheel)
 
 %description
 This project is a prototype for exposing a safe, high-level, app-facing
@@ -55,15 +58,36 @@ Requires: %{libname} = %{EVRD}
 %description -n %{girname}
 GObject introspection data for %{name}.
 
+%package -n python-%{name}
+Summary: Python modules for %{name}
+Group: Python
+Requires: %{libname} = %{EVRD}
+
+%description -n python-%{name}
+Python module for %{name}
+
 %prep
 %autosetup -n %{name}-%{version} -p1
 
 %build
-%meson \
+%meson -Dwheel=true
 %meson_build
 
 %install
 %meson_install
+
+# If python modules enabled (meson -Dwheel=true), teen gir and typelibs are installed in wrong dirs.
+# They install to correct dirs when python is off.
+
+# move GIR
+mkdir -p %{buildroot}%{_datadir}/gir-1.0
+mv %{buildroot}%{python3_sitelib}/pipewire_gobject/gir/Pwg-0.1.gir \
+   %{buildroot}%{_datadir}/gir-1.0/
+
+# move typelib
+mkdir -p %{buildroot}%{_libdir}/girepository-1.0
+mv %{buildroot}%{python3_sitelib}/pipewire_gobject/typelib/Pwg-0.1.typelib \
+   %{buildroot}%{_libdir}/girepository-1.0/
 
 %files -n %{libname}
 %{_libdir}/libpwg-%{api}.so.%{major}*
@@ -77,3 +101,7 @@ GObject introspection data for %{name}.
 
 %files -n %{girname}
 %{_libdir}/girepository-1.0/Pwg-%{api}.typelib
+
+%files -n python-%{name}
+%{python_sitelib}/pipewire_gobject/__init__.py
+%{python_sitelib}/pipewire_gobject/__pycache__/__init__.cpython-*.pyc
